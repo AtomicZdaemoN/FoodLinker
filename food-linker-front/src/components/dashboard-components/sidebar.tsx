@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Home, ShoppingCart, Package, Users2, Settings, LineChart, Package2, Apple} from "lucide-react";
+import { ShoppingCart, Package, Settings, Apple} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 
 function Sidebar() {
