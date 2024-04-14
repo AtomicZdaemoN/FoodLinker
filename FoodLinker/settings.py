@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f8=6mk6!o5=!eq1b3e!*twct5yxyi#l5%((32z8svebx+mnch4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'FoodLinker.urls'
@@ -84,10 +85,10 @@ WSGI_APPLICATION = 'FoodLinker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'foodlinker',
-        'USER': 'rol_pruebas',
-        'PASSWORD': 'pruebas123',
-        'HOST': '172.26.32.1',
+        'NAME': 'ddbra5dl8a28qu',
+        'USER': 'u7s30iadokqn5i',
+        'PASSWORD': 'pe160402e8168fdd6a4da08a1e4e88e4a6c7e9d177b71b61ab40bed675c633eb9',
+        'HOST': 'c9pbiquf6p6pfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
