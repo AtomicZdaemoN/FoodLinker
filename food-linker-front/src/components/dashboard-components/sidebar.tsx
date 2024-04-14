@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShoppingCart, Package, Settings, Apple} from "lucide-react";
+import {ShoppingCart, Package, Settings, Apple, Archive} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 
 function Sidebar() {
@@ -45,7 +45,7 @@ function Sidebar() {
                                 href="/dashboard/playground"
                                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                             >
-                                <Package className="h-5 w-5"/>
+                                <Archive className="h-5 w-5"/>
                                 <span className="sr-only">Playground</span>
                             </Link>
                         </TooltipTrigger>

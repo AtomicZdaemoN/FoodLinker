@@ -12,6 +12,7 @@ import {ListFilter, MoreHorizontal, PlusCircle} from "lucide-react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Badge} from "@/components/ui/badge";
 import Image from "next/image"
+import Link from "next/link";
 
 
 function ProductsContent() {
@@ -56,10 +57,12 @@ function ProductsContent() {
                   </span>
                         </Button>
                         <Button size="sm" className="h-7 gap-1">
-                            <PlusCircle className="h-3.5 w-3.5"/>
-                            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Add Product
-                  </span>
+                            <Link href="/dashboard/products/edit-product">
+                                <PlusCircle className="h-3.5 w-3.5"/>
+                                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                                Add Product
+                        </span>
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -364,7 +367,8 @@ function ProductsContent() {
                 </TabsContent>
             </Tabs>
         </main>
-    );
+    )
+        ;
 }
 
 export default ProductsContent;
