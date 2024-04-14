@@ -1,13 +1,17 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import User, Provider, Charity
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from rest_framework import serializers
-from .models import User, Provider, Charity
+from .models import Provider, Charity
+from FoodLinker import settings
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'password', 'name', 'address', 'phone', 'is_staff', 'is_active', 'date_joined']
+        fields = ['id', 'email', 'password', 'name', 'address', 'phone', 'is_provider', 'is_charity', 'is_staff', 'is_active', 'date_joined']
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {'required': True},
@@ -22,6 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
             name=validated_data['name'],
             address=validated_data['address'],
             phone=validated_data['phone'],
+            is_provider=validated_data.get('is_provider', False),
+            is_charity=validated_data.get('is_charity', False),
             is_staff=validated_data.get('is_staff', False),
             is_active=validated_data.get('is_active', True)
         )
@@ -88,3 +94,31 @@ class CharitySerializer(serializers.ModelSerializer):
         instance.capacity = validated_data.get('capacity', instance.capacity)
         instance.save()
         return instance
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['name'] = user.name
+        token['email'] = user.email
+
+        return token
+
+    def validate(self, attrs):
+        #  The email is used as the username
+        attrs['username'] = attrs['email']
+        data = super().validate(attrs)
+
+        # Add extra data to the response
+        refresh = self.get_token(self.user)
+
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+        # Add custom claims
+        data['name'] = self.user.name
+        data['email'] = self.user.email
+
+        return data
