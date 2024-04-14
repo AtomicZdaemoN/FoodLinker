@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
+
 # This module contains all the models for the accounts and authentication
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
@@ -38,12 +39,14 @@ class Provider(models.Model):
     class Meta:
         db_table = 'providers'
 
+
 class Charity(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     registration_id = models.CharField(max_length=100, unique=True)  # If registered in Official Government Database
     is_verified = models.BooleanField(default=False)  # If the charity is verified by the system
-    food_types = models.CharField(max_length=255, help_text="Types of food they can handle (e.g., perishable, non-perishable, both)")
+    food_types = models.CharField(max_length=255,
+                                  help_text="Types of food they can handle (e.g., perishable, non-perishable, both)")
     capacity = models.IntegerField(help_text="Maximum food quantity (in kilograms) they can store")
 
     def __str__(self):
