@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f8=6mk6!o5=!eq1b3e!*twct5yxyi#l5%((32z8svebx+mnch4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,10 +86,10 @@ WSGI_APPLICATION = 'FoodLinker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'foodlinker',
-        'USER': 'rol_pruebas',
-        'PASSWORD': 'pruebas123',
-        'HOST': '172.26.32.1',
+        'NAME': 'd2g8o3lcu6v15c',
+        'USER': 'uc6ruq2g8859go',
+        'PASSWORD': 'p05369a97fe6618aaa45877c5f52115952bf6e497426e8b74058779ec7282a1ce',
+        'HOST': 'cd5vlri6nnqe17.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -183,3 +185,27 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+# Define the base directory of your project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# URL to use when referring to static files (where they will be served from)
+STATIC_URL = 'static/'
+
+# Define the directory to collect all static files to (used by the `collectstatic` command)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Temporary directory to hold static files (not necessarily needed unless specifically required)
+STATIC_TMP = os.path.join(BASE_DIR, 'static')
+
+# Ensure the STATIC_ROOT and STATIC_TMP directories exist
+os.makedirs(STATIC_TMP, exist_ok=True)
+os.makedirs(STATIC_ROOT, exist_ok=True)
+
+# Additional locations to collect static files from (apart from each app's 'static' directory)
+STATICFILES_DIRS = [
+    STATIC_TMP,
+]
+
+# Define the static file storage system (using WhiteNoise for compression and caching support)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

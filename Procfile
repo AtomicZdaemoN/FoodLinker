@@ -1,0 +1,1 @@
+web gunicorn FoodLinker.wsgi:application --log-file -
