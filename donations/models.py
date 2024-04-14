@@ -6,6 +6,7 @@ from products.models import Product
 
 # This module contains all the models for the donations
 class Donation(models.Model):
+    id = models.AutoField(primary_key=True)
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
     charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
     notes = models.TextField(blank=True, null=True)
@@ -20,6 +21,7 @@ class Donation(models.Model):
 
 
 class DonationItem(models.Model):
+    id = models.AutoField(primary_key=True)
     donation = models.ForeignKey(Donation, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()

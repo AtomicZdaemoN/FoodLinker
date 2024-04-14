@@ -4,6 +4,7 @@ from django.db import models
 
 # This module contains all the models for the accounts and authentication
 class User(AbstractBaseUser):
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
@@ -24,6 +25,7 @@ class User(AbstractBaseUser):
 
 
 class Provider(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     license_number = models.CharField(max_length=255)
     is_license_verified = models.BooleanField(default=False)
@@ -35,6 +37,7 @@ class Provider(models.Model):
         db_table = 'providers'
 
 class Charity(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     registration_id = models.CharField(max_length=100, unique=True)  # If registered in Official Government Database
     is_verified = models.BooleanField(default=False)  # If the charity is verified by the system
@@ -46,4 +49,3 @@ class Charity(models.Model):
 
     class Meta:
         db_table = 'charities'
-

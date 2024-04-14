@@ -2,6 +2,7 @@ from django.db import models
 
 # This module contains all the models for the products
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
 
@@ -12,6 +13,7 @@ class Category(models.Model):
         db_table = 'categories'
 
 class Product(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
